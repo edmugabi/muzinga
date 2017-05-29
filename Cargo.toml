@@ -1,0 +1,6 @@
+[package]
+name = "muzinga"
+version = "0.1.0"
+authors = ["Edgar Mugabi <edmugabi@gmail.com>"]
+
+[dependencies]
