@@ -1,5 +1,3 @@
-#![feature(box_syntax)]
-
 mod lexer;
 mod parser;
 mod evaluator;

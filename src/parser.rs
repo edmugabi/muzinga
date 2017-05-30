@@ -55,7 +55,7 @@ impl<'a> Parser<'a> {
                         let (op_expr,v_nodes) = self.parse_expr(Prec::PREFIX,v).unwrap();
                                         Ok((Expr::UnExpr(
                                                 UnOp::Neg,
-                                                box op_expr),
+                                                Box::new(op_expr)),
                                          v_nodes))},
                     _ => Err(format!("{:?} not a prefix token",op_tok))
                 },
@@ -93,8 +93,8 @@ impl<'a> Parser<'a> {
 
                     Ok((Expr::BinExpr(
                         bin_op,
-                        box left,
-                        box right
+                        Box::new(left),
+                        Box::new(right)
                     ),v))
                 },
                 _ => Err(format!("Unexpected Token {:?}",t))
@@ -153,12 +153,12 @@ mod tests {
         let (expr,_) = p.parse().unwrap();
         let expected_expr = Expr::BinExpr(
                                 BinOp::Sub,
-                                box Expr::BinExpr(
+                                Box::new( Expr::BinExpr(
                                     BinOp::Add,
-                                    box Expr::BinExpr(BinOp::Sub, box Expr::Val(4), box Expr::Val(10)),
-                                    box Expr::Val(6),
-                                ),
-                                box Expr::Val(5)
+                                    Box::new(Expr::BinExpr(BinOp::Sub, Box::new(Expr::Val(4)), Box::new(Expr::Val(10)))),
+                                    Box::new( Expr::Val(6)),
+                                )),
+                                Box::new( Expr::Val(5) )
                         );
         assert_eq!(expected_expr, expr);
 
